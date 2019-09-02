@@ -8,8 +8,8 @@ import (
 )
 
 type ClientSetOptions struct {
-    mySQLOption *mysql.MySQLOptions
-    redisOption *redis.RedisOptions
+    mySQLOption  *mysql.MySQLOptions
+    redisOption  *redis.RedisOptions
     devopsOption *devops.DevopsOptions
 }
 
@@ -35,7 +35,6 @@ func (c *ClientSetOptions) SetDevopsOption(option *devops.DevopsOptions) *Client
 // ClientSet provide best of effort service to initialize clients,
 // but there is no guarantee to return a valid client instance,
 // so do validity check before use
-
 type ClientSet struct {
     MySQL *mysql.MySQL
 }

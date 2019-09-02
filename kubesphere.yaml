@@ -1,0 +1,19 @@
+mysql:
+  host: ""
+  port: 3306
+  username: ""
+  password: ""
+  maxidleconnections: 100
+  maxopenconnections: 100
+  maxconnectionlifetime: 10s
+devops:
+  sonarqubeoption: {}
+redis:
+  host: ""
+  port: 0
+  password: ""
+  db: 0
+kubernetes:
+  kubeconfig: /Users/zry/.kube/config
+  qps: 0
+  burst: 0

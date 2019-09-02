@@ -6,20 +6,20 @@ import (
 )
 
 type DevopsOptions struct {
-    Host string
-    Username string
-    Password string
-    MaxConnections int
+    Host           string `json:"host,omitempty" yaml:",omitempty"`
+    Username       string `json:"username,omitempty" yaml:",omitempty"`
+    Password       string `json:"-" yaml:",omitempty"`
+    MaxConnections int `json:"maxConnections,omitempty" yaml:"maxConnections,omitempty"`
 
     SonarqubeOption *sonarqube.SonarqubeOptions
 }
 
-func NewDevopsOptions() *DevopsOptions{
+func NewDevopsOptions() *DevopsOptions {
     return &DevopsOptions{
-        Host:           "",
-        Username:       "",
-        Password:       "",
-        MaxConnections: 0,
+        Host:            "",
+        Username:        "",
+        Password:        "",
+        MaxConnections:  0,
         SonarqubeOption: sonarqube.NewSonarqubeOptions(),
     }
 }

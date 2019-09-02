@@ -3,8 +3,8 @@ package sonarqube
 import "github.com/spf13/pflag"
 
 type SonarqubeOptions struct {
-    Host string
-    Token string
+    Host  string `json:"host,omitempty" yaml:",omitempty"`
+    Token string `json:"token,omitempty" yaml:",omitempty"`
 }
 
 func NewSonarqubeOptions() *SonarqubeOptions {

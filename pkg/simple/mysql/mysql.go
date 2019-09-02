@@ -49,7 +49,7 @@ type MySQL struct {
     *dbr.Connection
 }
 
-func NewMySQL(option *MySQLOptions, stopCh <-chan struct{}) *MySQL{
+func NewMySQL(option *MySQLOptions, stopCh <-chan struct{}) *MySQL {
     m := &MySQL{}
 
     conn, err := dbr.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%d)/devops?parseTime=1&multiStatements=1&charset=utf8mb4&collation=utf8mb4_unicode_ci", option.Username, option.Password, option.Host, option.Port), nil)
@@ -63,7 +63,7 @@ func NewMySQL(option *MySQLOptions, stopCh <-chan struct{}) *MySQL{
 
     m.Connection = conn
 
-    go func(){
+    go func() {
         <-stopCh
         if err := conn.Close(); err != nil {
             klog.Warningf("error happened during closing mysql connection", err)

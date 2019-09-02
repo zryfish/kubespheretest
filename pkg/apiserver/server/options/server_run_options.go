@@ -3,6 +3,7 @@ package options
 import (
     "fmt"
     "github.com/spf13/pflag"
+    netutil "github.com/zryfish/kubespheretest/pkg/util/net"
     "net"
     "time"
 )
@@ -13,8 +14,8 @@ type ServerRunOptions struct {
 
     InsecurePort int
 
-    SecurePort int
-    TlsCertFile string
+    SecurePort        int
+    TlsCertFile       string
     TlsPrivateKeyFile string
 
     RequestTimeout time.Duration
@@ -22,8 +23,8 @@ type ServerRunOptions struct {
 
 func NewServerRunOptions() *ServerRunOptions {
     return &ServerRunOptions{
-        BindAddress:  net.IPv6loopback,
-        InsecurePort:      0,
+        BindAddress:       net.IPv4(0, 0, 0, 0),
+        InsecurePort:      9090,
         SecurePort:        0,
         TlsCertFile:       "",
         TlsPrivateKeyFile: "",
@@ -31,14 +32,14 @@ func NewServerRunOptions() *ServerRunOptions {
     }
 }
 
-func (s* ServerRunOptions) Validate() []error {
+func (s *ServerRunOptions) Validate() []error {
     errors := []error{}
 
-    if s.InsecurePort < 0 || s.InsecurePort > 65535 {
+    if netutil.IsValidPort(s.InsecurePort) {
         errors = append(errors, fmt.Errorf("--insecure-port is out of port range"))
     }
 
-    if s.SecurePort < 0 || s.SecurePort > 65535 {
+    if netutil.IsValidPort(s.SecurePort) {
         errors = append(errors, fmt.Errorf("--secure-port is out of port range"))
     }
 

@@ -8,8 +8,8 @@ import (
 
 type KubernetesOptions struct {
     KubeConfig string
-    QPS int
-    Burst int
+    QPS        int
+    Burst      int
 }
 
 func NewKubernetesOptions() *KubernetesOptions {

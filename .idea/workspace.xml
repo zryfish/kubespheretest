@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04243778-770e-433e-9a88-972cb2dc2a8a" name="Default Changelist" comment="" />
+    <list default="true" id="04243778-770e-433e-9a88-972cb2dc2a8a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cmd/hypersphere/hypersphere.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apiserver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/ks-apiserver/app/options/options.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/ks-apiserver/app/options/options.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/ks-apiserver/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/ks-apiserver/app/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/apiserver/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/apiserver/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/apiserver/server/options/server_run_options.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/apiserver/server/options/server_run_options.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/simple/devops/devops.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/simple/devops/devops.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/simple/devops/sonarqube/sonarqube.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/simple/devops/sonarqube/sonarqube.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/simple/factory.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/simple/factory.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/simple/kubernetes/kubernetes.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/simple/kubernetes/kubernetes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/simple/mysql/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/simple/mysql/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/simple/redis/redis.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/simple/redis/redis.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/util/net/net.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/util/net/net.go" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +42,7 @@
   <component name="ProjectId" id="1QBDgpZ0HPNjBDXdK71dyDbTFjX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
@@ -51,6 +69,32 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Go Build.go build github.com/zryfish/kubespheretest/cmd/ks-apiserver">
+    <configuration name="go build github.com/zryfish/kubespheretest/cmd/ks-apiserver" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="kubespheretest" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/cmd/ks-apiserver/apiserver.go" />
+      <package value="github.com/zryfish/kubespheretest/cmd/ks-apiserver" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="kubespheretest" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/cmd/ks-apiserver/app/server.go" />
+      <package value="github.com/zryfish/kubespheretest" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build github.com/zryfish/kubespheretest/cmd/ks-apiserver" />
+        <item itemvalue="Go Build.go build server.go" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />

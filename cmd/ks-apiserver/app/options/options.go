@@ -1,12 +1,15 @@
 package options
 
 import (
+    "flag"
     genericoptions "github.com/zryfish/kubespheretest/pkg/apiserver/server/options"
     "github.com/zryfish/kubespheretest/pkg/simple/devops"
     "github.com/zryfish/kubespheretest/pkg/simple/kubernetes"
     "github.com/zryfish/kubespheretest/pkg/simple/mysql"
     "github.com/zryfish/kubespheretest/pkg/simple/redis"
     cliflag "k8s.io/component-base/cli/flag"
+    "k8s.io/klog"
+    "strings"
 )
 
 type ServerRunOptions struct {
@@ -14,7 +17,7 @@ type ServerRunOptions struct {
     Redis                   *redis.RedisOptions
     MySQL                   *mysql.MySQLOptions
     Devops                  *devops.DevopsOptions
-    Kubernetes *kubernetes.KubernetesOptions
+    Kubernetes              *kubernetes.KubernetesOptions
 }
 
 func NewServerRunOptions() *ServerRunOptions {
@@ -23,7 +26,7 @@ func NewServerRunOptions() *ServerRunOptions {
         Redis:                   redis.NewRedisOptions(),
         MySQL:                   mysql.NewMySQLOptions(),
         Devops:                  devops.NewDevopsOptions(),
-        Kubernetes: kubernetes.NewKubernetesOptions(),
+        Kubernetes:              kubernetes.NewKubernetesOptions(),
     }
 
     return &s
@@ -37,6 +40,14 @@ func (s *ServerRunOptions) Flags() (fss cliflag.NamedFlagSets) {
     s.MySQL.AddFlags(fss.FlagSet("mysql"))
     s.Devops.AddFlags(fss.FlagSet("devops"))
 
+    fs := fss.FlagSet("klog")
+    local := flag.NewFlagSet("klog", flag.ExitOnError)
+    klog.InitFlags(local)
+    local.VisitAll(func(fl *flag.Flag){
+        fl.Name = strings.Replace(fl.Name, "_", "-", -1)
+        fs.AddGoFlag(fl)
+    })
+    //klog.InitFlags(fss.FlagSet("klog"))
 
     return fss
 }

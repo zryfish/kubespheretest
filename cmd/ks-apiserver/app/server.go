@@ -2,17 +2,22 @@ package app
 
 import (
     "fmt"
+    "github.com/emicklei/go-restful"
     "github.com/spf13/cobra"
     "github.com/spf13/pflag"
     "github.com/zryfish/kubespheretest/cmd/ks-apiserver/app/options"
+    "github.com/zryfish/kubespheretest/pkg/apiserver"
+    "github.com/zryfish/kubespheretest/pkg/apiserver/runtime"
     cliflag "k8s.io/component-base/cli/flag"
     "k8s.io/klog"
+    "net/http"
     "os"
     "os/signal"
     "syscall"
 
     "k8s.io/apiserver/pkg/util/term"
 )
+
 var shutdownSignals = []os.Signal{os.Interrupt, syscall.SIGTERM}
 
 var onlyOneSignalHandler = make(chan struct{})
@@ -46,7 +51,7 @@ func NewAPIServerCommand() *cobra.Command {
     s := options.NewServerRunOptions()
 
     cmd := &cobra.Command{
-        Use:  "apiserver",
+        Use: "apiserver",
         Long: `The apiserver validates and configures data 
 for the api objects which include balabala.`,
         RunE: func(cmd *cobra.Command, args []string) error {
@@ -80,5 +85,49 @@ for the api objects which include balabala.`,
 }
 
 func Run(serverRunOptions *options.ServerRunOptions, stopCh <-chan struct{}) error {
-    return nil
+    klog.V(0).Info("Start server")
+    conf := apiserver.NewConfig()
+
+    conf.MySQL = serverRunOptions.MySQL
+    conf.Redis = serverRunOptions.Redis
+    conf.Kubernetes = serverRunOptions.Kubernetes
+    conf.Devops = serverRunOptions.Devops
+
+    apiserver.Set(conf)
+
+    err := apiserver.SaveToFile("kubesphere.yaml", conf)
+
+    if err != nil {
+        klog.Fatal(err)
+    }
+
+    container := runtime.Container()
+    addWebService(container)
+
+    klog.V(0).Info(fmt.Sprintf("start listening on %s:%d", serverRunOptions.GenericServerRunOptions.BindAddress, serverRunOptions.GenericServerRunOptions.InsecurePort))
+    err = http.ListenAndServe(fmt.Sprintf("%s:%d", serverRunOptions.GenericServerRunOptions.BindAddress, serverRunOptions.GenericServerRunOptions.InsecurePort), container)
+    if err != nil {
+        klog.Fatal(err)
+    }
+
+    return err
+
+}
+
+func addWebService(c *restful.Container) {
+    ws := restful.WebService{}
+
+    ws.Path("/")
+
+    ws.Route(ws.GET("/config").
+        To(getConfig).
+        Returns(http.StatusOK, "ok", apiserver.Config{}).
+        Writes(apiserver.Config{}))
+
+    c.Add(&ws)
+}
+
+func getConfig(request *restful.Request, response *restful.Response) {
+    c := apiserver.Get()
+    response.WriteAsJson(&c)
 }
